@@ -12,9 +12,10 @@ Component: A component labels an entity as possessing a particular aspect and bi
 
 System: A system is a process which acts on all entities who's has the same binary signature (register by the component) as him. For example a physics system may query for entities having mass, velocity and position components, and iterate over the results doing physics calculations on the sets of components for each entity. 
 
--Entity Manager
+- Entity Manager
 
 The Entity Manager is in charge of distributing entity IDs and keeping record of which IDs are in use and which are not.
+
 EntityManager.hpp
 ```Cpp
     class EntityManager
@@ -48,7 +49,7 @@ EntityManager.hpp
 
 The component will add a unique binary signature to an entity with all it's component.
 
--Component Manager
+- Component Manager
 
 The Component Manager, which is in charge of talking to all of the different Component Arrays when a component needs to be added or removed.
 
