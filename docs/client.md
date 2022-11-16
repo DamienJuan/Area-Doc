@@ -57,7 +57,7 @@ This UML diagram shows how the player interact with entities :
 ![](/assets/Game/actor.png)
 
     The graphical user interface is in permanent waiting of a command.
-    ![](/assets/Game/server_client.png)
+![](/assets/Game/server_client.png)
 
-Architecture for client :
+Architecture for client networking :
 ![](/assets/Client/class_model.png)
