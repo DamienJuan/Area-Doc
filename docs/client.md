@@ -1,4 +1,4 @@
-Part 2: Client
+Part 3: Client
 ==============
 
 Description
@@ -54,6 +54,10 @@ The solo version of the game aim to reach the end by defeating the final boss wh
 This UML diagram shows how the player interact with entities :
 
 
-![](/assets/diagram_actor.png)
+![](/assets/Game/actor.png)
 
     The graphical user interface is in permanent waiting of a command.
+    ![](/assets/Game/server_client.png)
+
+Architecture for client :
+![](/assets/Client/class_model.png)

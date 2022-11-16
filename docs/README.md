@@ -11,8 +11,8 @@ The following documentation describe all the details and constraints.
 
 R-Type is a horizontally scrolling shooter arcade video game. The player controls a star ship to destroy aliens.
 
-There is three parts to this project:
-
+There is four parts to this project:
+- **[The core](core.md)**
 - **[The server](server.md)**
 - **[The client](client.md)**
 - **[Game Engine](game_engine.md)**
@@ -31,6 +31,7 @@ Contents
 ========
 
    [Usage](usage.md)
+   [Core](core.md)
    [Server](server.md)
    [Client](client.md)
    [Game Engine, ECS](game_engine.md)

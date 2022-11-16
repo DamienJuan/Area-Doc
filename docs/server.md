@@ -1,4 +1,4 @@
-Part 1: Server
+Part 2: Server
 ==============
 
 Description
@@ -93,3 +93,5 @@ int main(int argc, char** argv)
     return 0;
 }
 ```
+Architecture for server :
+![](/assets/Server/class_model.png)

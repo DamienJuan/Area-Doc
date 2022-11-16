@@ -1,5 +1,5 @@
 
-Part 3: Game Engine
+Part 4: Game Engine
 ===================
 
 Entity Component System (ECS) is our software architectural pattern aka our game engine.
@@ -123,3 +123,6 @@ SystemManager.hpp
 ```
 
 The system get the signature of the components in order to modify the entities' components by their signature.
+
+ECS architecture :
+![](/assets/ECS/system.png)
