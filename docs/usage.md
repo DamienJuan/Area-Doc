@@ -1,18 +1,27 @@
 Usage
 =====
-To build the R-Type project:
 
-```bash
-∼/B-CPP-500> ./build_linux.sh
+Prerequisites
 ```
-To use R-Type Server:
-```bash
-∼/B-CPP-500>  ./build/rtype_server TcpServerAddr TcpServerPort UdpServerAddr UdpServerPort
+install docker
+  https://www.docker.com/products/docker-desktop/
 ```
-ex : ./build/r-type-server 127.0.0.1 1234 127.0.0.1 1235
+To build the AREA project :
+```bash
+∼/B-DEV-500> docker compose up
+```
 
-To use R-Type Client:
+Open the web client :
 ```bash
-∼/B-CPP-500>  ./build/rtype_client TcpServerAddr TcpServerPort UdpServerAddr UdpServerPort UdpClientAddr UdpClientPort
+  http://localhost:8081/
 ```
-ex : ./build/r-type-client 127.0.0.1 1234 127.0.0.1 1235 127.0.0.1 3454
+
+Open the application server :
+```bash
+  http://localhost:8080/api/
+```
+
+Download the mobile client apk (android only) :
+```bash
+  http://localhost:8081/client.apk
+```
