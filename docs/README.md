@@ -1,21 +1,25 @@
-R-Type
-======
+Areamusement
+============
 
-Welcome to our R-Type documentation!
+Welcome to our AREA documentation!
 ====================================
 
-**R-Type** is the first graphical project made in our third year at Epitech.
-The goal of this project is to create a network game.
+**AREA** (Action REaction) is a web development project made in our third year at Epitech.
+
+The goal of this project is to create a software suite that functions similar to that of **[IFTT](https://ifttt.com/)** and/or **[Zapier](https://zapier.com/)**.
+
+This software suite will be broken into three parts :
+
+- An application server
+- A web client to use the application from your browser by querying the application server
+- A mobile client to use the application from your phone by querying the application server
 
 The following documentation describe all the details and constraints.
 
-R-Type is a horizontally scrolling shooter arcade video game. The player controls a star ship to destroy aliens.
-
-There is four parts to this project:
-- **[The core](core.md)**
-- **[The server](server.md)**
-- **[The client](client.md)**
-- **[Game Engine](game_engine.md)**
+There is three parts to this project:
+- **[The API](api.md)**
+- **[The Front Web](web.md)**
+- **[The Front Mobile](mobile.md)**
 
 
 Informations
@@ -31,8 +35,6 @@ Contents
 ========
 
    [Usage](usage.md)
-   [Core](core.md)
-   [Server](server.md)
-   [Client](client.md)
-   [Game Engine, ECS](game_engine.md)
-
+   [The API](core.md)
+   [The Front Web](server.md)
+   [The Front Mobile](client.md)
