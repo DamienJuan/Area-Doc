@@ -1,3 +1,5 @@
+Mobile CLient
+=============
 Description
 ===========
 [React Native](https://reactnative.dev/) is a framework developed by Facebook teams in 2015 with the aim of accelerating the development and maintenance of its mobile applications. This technology allows developers to develop native iOS and Android mobile apps with a single code base while keeping the "look and feel" of native apps.
@@ -24,8 +26,8 @@ react-native run-android
 - Step 4: Test the application  
 Once the application is launched, you can test the application's functionality on an emulator or mobile device.  
 
-Navigation
-==========
+Routing
+=======
 
 Navigation between pages is done using @react-navigation/native is a navigation library by providing navigation components to do this we use StackNavigator it is through this component that we can move between the different services offered:
 
