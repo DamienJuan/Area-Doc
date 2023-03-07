@@ -95,5 +95,45 @@ const Login = ({navigation}) => {
     } 
 ```
 
+AREA creation
+=============
+The createArea function is an asynchronous function in JavaScript. It uses the AsyncStorage API to retrieve the username stored in the device's local memory, and then it creates a data object containing various information such as the user's name, action and reaction service names, action and reaction item names.  
+
+Then the function sends a POST request to an endpoint of a server, probably to create a new automation zone. The POST request uses the data object as the request body, transforming it into a JSON string.  
+
+Finally, the function uses the then method to process the response to the request, either displaying the data returned by the server in the console or displaying an error if the request fails.  
+
+```js
+const createArea = async () => {
+    const username = await AsyncStorage.getItem('username');
+    const data = {
+      appUsername: username,
+  
+      actionService: actionService,
+      actionName: actionName,
+      actionElemName: actionElemName,
+  
+      reactionService: reactionService,
+      reactionName: reactionName,
+      reactionElemName: reactionElemName,
+    };
+    console.log(data);
+    fetch(`${serverEndpoint}/api/auth/github/newarea`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    console.log("username:", username);
+  } 
+```
 Architecture for mobile client :
 ![](/assets/Client/class_model.png)
