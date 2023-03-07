@@ -1,97 +1,165 @@
-Part 2: Server
-==============
+Web Client
+==========
 
 Description
 ===========
-The server is the main engine that will interfere between the game and the client.
-It will exchange all data with the game and execute these instructions.
-At the same time, it send the information to the client.
+The front end is developed with **[React](https://fr.reactjs.org/)** and using **[Material UI](https://mui.com/)**
 
-Communication
-=============
-In this part we will see in more details the communication protocol
-and the management of the commands received by the server.
 
-we use boost asio library to manage the communication between the server and the client.
-
-we use a UDP Server and TCP Server
-to communicate between the client and the server.
-
-the UDP for game and TCP for Menu and first Connection
-
-We use a serialization of data in binary format to send the data
-between the client and the server.
-
-Connection
-==============
-
-The client will connect to the server with a TCP connection.
-The server will send the client the list of the games available.
-The client will choose the game he want to play and the server will send him
-the information about the game.
-
-The client will send the server the information about the game he want to play.
-The server will send the client the information about the game.
-
-- main for server connection
-
-```Cpp
-int main(int argc, char const *argv[])
-{
-	std::string tcpServerAddr, udpServerAddr;
-  	int tcpServerPort, udpServerPort;
-
-  	if (argc != 5) {
-  	  	std::cout << "./r-type-server serverAddress serverPort\n";
-  	  	return 84;
-  	} else {
-  	  	tcpServerAddr = std::string(argv[1]);
-  	  	tcpServerPort = atoi(argv[2]);
-		udpServerAddr = std::string(argv[3]);
-  	  	udpServerPort = atoi(argv[4]);
-  	}
-	std::shared_ptr<bool> isRunning = std::make_shared<bool>(true);
-	std::unique_ptr<ServerNetworking> serverNetworking = std::make_unique<ServerNetworking>(tcpServerAddr, tcpServerPort, udpServerAddr, udpServerPort, isRunning);
-
-    ServerCore serverCore(std::move(serverNetworking), isRunning);
-    
-	serverCore.Loop();
-    
-	serverCore.End();
-
-	return 0;
+Routing
+=======
+The web application is divided into 4 pages :  
+- the home page, where you can register or login
+- the my-area page, where you can create an AREA with the services you are subscribed to
+- the services page, where you can subscribe to services
+- the profile page, where you can manage your existing AREAs
+```js
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/my-area" element={<MyArea />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/client.apk" component={ApkDownload} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 ```
 
-- main for client connection
+Register
+========
+This code defines a function named register that takes in an optional formData object as its argument. It returns a Promise that resolves with a boolean value indicating whether the registration was successful or not.
 
-```Cpp
-int main(int argc, char** argv)
-{
-    std::string tcpServerAddr, udpServerAddr;
-    int tcpServerPort, udpServerPort;
-    
-    if (argc != 5) {
-      std::cout << "./r-type-client serverAddress serverPort\n";
-      return 84;
-    } else {
-      tcpServerAddr = std::string(argv[1]);
-      tcpServerPort = atoi(argv[2]);
-      udpServerAddr = std::string(argv[3]);
-      udpServerPort = atoi(argv[4]);
+Within the function, it makes a POST request to a registration endpoint /api/auth/register using the Axios library. It passes the formData object as the request body.
+
+If the request is successful, the function extracts two properties from the response data using destructuring:
+
+- accountData: an object containing data related to the user's account
+- accessToken: a token used for authentication
+The function then sets the accountData object in the state using setAccount, sets the accessToken in the state using setToken, and sets isLoggedIn to true using setIsLoggedIn. It also logs the accountData object to the console.
+
+Finally, the function resolves the Promise with a value of true.
+
+If the request fails, the function logs the error to the console using console.error. It then rejects the Promise with an error message. The error message is obtained from the error response data, if available, or from the error object's message property.
+```js
+const register = (formData = {}) =>
+    new Promise((resolve, reject) => {
+      axios
+        .post('/api/auth/register', formData)
+        .then(({
+          data: {
+            data: accountData,
+            token: accessToken,
+          },
+        }) => {
+          setAccount(accountData)
+          console.log("AccountData->", accountData);
+          localStorage.setItem('token', token);
+          localStorage.setItem('username', accountData.username);
+          localStorage.setItem('userid', accountData._id);
+          setToken(accessToken)
+          setIsLoggedIn(true)
+          resolve(true)
+        })
+        .catch((error) => {
+          console.error(error)
+          reject(error?.response?.data?.message || error.message)
+        })
+    })
+```
+
+Login
+=====
+This code defines a function named login that takes in an optional formData object as its argument. It returns a Promise that resolves with a boolean value indicating whether the login was successful or not.
+
+Within the function, it makes a POST request to a login endpoint /api/auth/login using the Axios library. It passes the formData object as the request body.
+
+If the request is successful, the function extracts two properties from the response data using destructuring:
+
+- accountData: an object containing data related to the user's account
+- accessToken: a token used for authentication
+The function then sets the accountData object in the state using setAccount, sets the accessToken in the state using setToken, and sets isLoggedIn to true using setIsLoggedIn. It also logs the accountData object to the console.
+
+Finally, the function resolves the Promise with a value of true.
+
+If the request fails, the function logs the error to the console using console.error. It then rejects the Promise with an error message. The error message is obtained from the error response data, if available, or from the error object's message property.
+```js
+const login = (formData = {}) =>
+    new Promise((resolve, reject) => {
+      axios
+        .post('/api/auth/login', formData)
+        .then(({
+          data: {
+            data: accountData,
+            token: accessToken,
+          },
+        }) => {
+          setAccount(accountData)
+          localStorage.setItem('username', accountData.username);
+          localStorage.setItem('userid', accountData._id);
+          console.log("AccountDATA=", accountData);
+          setToken(accessToken)
+          setIsLoggedIn(true)
+          resolve(true)
+        })
+        .catch((error) => {
+          console.error(error)
+          reject(error?.response?.data?.message || error.message)
+        })
+    })
+```
+
+Auth
+====
+ex : GitHub  
+The component AuthGithub takes in a single props object. Within the component, it initializes a state variable isGithubAuth and sets its initial value to null. It also uses the useAuth hook, which likely returns authentication data related to the user's account.
+
+The component also defines a function named sendGithubToServ, which takes in two arguments: an accessToken and a gitname. The function makes an asynchronous PUT request to a URL using the fetch function. The URL is http://localhost:8080/api/auth/github/githubat.
+
+The request is made with the following options:
+
+- The method is PUT.
+- The headers include a Content-Type header with a value of "application/json".
+- The body of the request is a JSON object with three properties: token, username, and gitname. The values of these properties are set to the accessToken, a value retrieved from localStorage.getItem("username"), and the gitname argument, respectively.  
+
+If the request is successful, the function logs the response data to the console using console.log. If an error occurs, it logs the error to the console using console.error.
+After the request completes (whether successfully or unsuccessfully), the function logs a message to the console saying that the fetch was successful.
+It handle the authentication with a Github account, sending an access token and Github username to the server for verification.
+```js
+const AuthGithub = (props) => {
+  const [isGithubAuth, setIsGithubAuth] = useState(null);
+  const { account } = useAuth();
+
+  const sendGithubToServ = async (accessToken, gitname) => {
+    const requestOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token: accessToken,
+        username: localStorage.getItem("username"),
+        gitname: gitname,
+      }),
+    };
+    try {
+      console.log("Fetching with '", accessToken, "' ...");
+      await fetch(
+        "http://localhost:8080/api/auth/github/githubat",
+        requestOptions
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("RESPONSE OF SEND DATA TO SERV:", data);
+        });
+    } catch (error) {
+      console.error(error);
     }
-    
-    std::shared_ptr<bool> isRunning = std::make_shared<bool>(true);
-    std::unique_ptr<ClientNetworking> clientNetworking = make_unique<ClientNetworking>(tcpServerAddr, tcpServerPort, udpServerAddr, udpServerPort, isRunning);
-    
-    ClientCore clientCore(std::move(clientNetworking), isRunning);
-    
-    clientCore.Loop();
-    
-    clientCore.End();
-
-    return 0;
-}
+    console.log("Fetched succesfully");
+  };
 ```
-Architecture for server :
+
+Architecture for Web client :
 ![](/assets/Server/class_model.png)
