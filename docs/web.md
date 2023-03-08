@@ -161,5 +161,5 @@ const AuthGithub = (props) => {
   };
 ```
 
-Operating diagram :
+Operating diagram :   
 ![](/assets/web_diagram.png)
