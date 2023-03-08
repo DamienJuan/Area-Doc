@@ -247,5 +247,5 @@ In the 'services' folder, there is a folder conrresponding to each service:
     /twilio.js contains the function to handle twilio's operations:
         -Send sms
 
-
-
+Operating diagram :
+![](/assets/api_diagram.png)
