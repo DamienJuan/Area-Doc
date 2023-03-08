@@ -161,5 +161,5 @@ const AuthGithub = (props) => {
   };
 ```
 
-Architecture for Web client :
+Operating diagram :
 ![](/assets/web_diagram.png)
