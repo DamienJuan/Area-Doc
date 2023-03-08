@@ -135,5 +135,5 @@ const createArea = async () => {
     console.log("username:", username);
   } 
 ```
-Architecture for mobile client :
-![](/assets/Client/class_model.png)
+Operating diagram :
+![](/assets/mobile_diagram.png)
