@@ -162,4 +162,4 @@ const AuthGithub = (props) => {
 ```
 
 Architecture for Web client :
-![](/assets/Server/class_model.png)
+![](/assets/web_diagram.png)
